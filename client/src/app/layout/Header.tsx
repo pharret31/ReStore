@@ -1,7 +1,7 @@
-import { ShoppingCart } from "@mui/icons-material";
-import { AppBar, Badge, Box, IconButton, List, ListItem, Switch, Toolbar, Typography } from "@mui/material";
-import { Link, NavLink } from "react-router-dom";
-import { useStoreContext } from "../context/StoreContext";
+import { ShoppingCart } from "@mui/icons-material"
+import { AppBar, Badge, Box, IconButton, List, ListItem, Switch, Toolbar, Typography } from "@mui/material"
+import { Link, NavLink } from "react-router-dom"
+import { useAppSelector } from "../store/configureStore"
 
 interface Props {
     darkMode: boolean;
@@ -11,12 +11,12 @@ interface Props {
 const midLinks = [
     { title: 'catalog', path: '/catalog' },
     { title: 'about', path: '/about' },
-    { title: 'contact', path: '/contact' }
+    { title: 'contact', path: '/contact' },
 ]
 
 const rightLinks = [
     { title: 'login', path: '/login' },
-    { title: 'register', path: '/register' }
+    { title: 'register', path: '/register' },
 ]
 
 const navStyles = {
@@ -24,15 +24,15 @@ const navStyles = {
     textDecoration: 'none',
     typography: 'h6',
     '&:hover': {
-        color: 'grey.500'
+        color: 'grey.500',
     },
     '&.active': {
-        color: 'text.secondary'
-    }
+        color: 'text.secondary',
+    },
 }
 
 export default function Header({ darkMode, handleThemeChange }: Props) {
-    const { basket } = useStoreContext()
+    const { basket } = useAppSelector(state => state.basket)
 
     const itemCount = basket?.items.reduce((sum, item) => sum + item.quantity, 0)
 
