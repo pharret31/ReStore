@@ -1,8 +1,8 @@
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
 import { useFormContext } from "react-hook-form"
-import AppTextInput from "../components/AppTextInput"
-import AppCheckbox from "../components/AppCheckbox"
+import AppTextInput from "../../app/components/AppTextInput"
+import AppCheckbox from "../../app/components/AppCheckbox"
 
 export default function AddressForm() {
     const { control, formState } = useFormContext()
