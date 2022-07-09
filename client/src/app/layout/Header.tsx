@@ -2,7 +2,7 @@ import { ShoppingCart } from "@mui/icons-material"
 import { AppBar, Badge, Box, IconButton, List, ListItem, Switch, Toolbar, Typography } from "@mui/material"
 import { Link, NavLink } from "react-router-dom"
 import { useAppSelector } from "../store/configureStore"
-import SignedInMenu from "./SignedInMenu";
+import SignedInMenu from "./SignedInMenu"
 
 interface Props {
     darkMode: boolean;
@@ -49,16 +49,28 @@ export default function Header({ darkMode, handleThemeChange }: Props) {
                     <Switch checked={darkMode} onChange={handleThemeChange} />
                 </Box>
                 <List sx={{ display: "flex" }}>
-                    {midLinks.map(({ title, path }) => (
+                    {
+                        midLinks.map(({ title, path }) => (
+                            <ListItem
+                                component={NavLink}
+                                to={path}
+                                key={path}
+                                sx={navStyles}
+                            >
+                                {title.toUpperCase()}
+                            </ListItem>
+                        ))
+                    }
+                    {
+                        user && user.roles?.includes("Admin") &&
                         <ListItem
                             component={NavLink}
-                            to={path}
-                            key={path}
+                            to={"/inventory"}
                             sx={navStyles}
                         >
-                            {title.toUpperCase()}
+                            INVENTORY
                         </ListItem>
-                    ))}
+                    }
                 </List>
                 <Box display="flex" alignItems="center">
                     <IconButton component={Link} to="/basket" size="large" sx={{ color: "inherit" }}>
